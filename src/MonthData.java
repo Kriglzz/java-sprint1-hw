@@ -1,36 +1,34 @@
-import java.util.Scanner;
-
 public class MonthData {
-    int[] days=new int[30];                                                  //Массив для статистики на каждый день месяца
+    int[] days=new int[30];
 
-    void printDaysAndStepsFromMonth(MonthData[]monthToData, int monthPick){                //уточнить у эксперта, как надо было сделать правильно. Сделал не по тз, но не знал как по другому
+    void printDaysAndStepsFromMonth(){
         for (int i=0; i< days.length; i++){
 
-            System.out.println((i+1)+" день: "+monthToData[monthPick-1].days[i]);
+            System.out.println((i+1)+" день: "+days[i]);
         }
     }
-    int sumStepsFromMonth(MonthData[]monthToData, int monthPick){
+    int sumStepsFromMonth(){
         int sumStepsFromMonth=0;
         for(int i=0; i< days.length;i++){
-            sumStepsFromMonth+=monthToData[monthPick-1].days[i];
+            sumStepsFromMonth+=days[i];
         }
         return sumStepsFromMonth;
     }
-    int maxSteps(MonthData[]monthToData, int monthPick){
+    int maxSteps(){
         int maxSteps=0;
-        for(int i=0; i< days.length;i++){
-            if(monthToData[monthPick-1].days[i]>maxSteps){
-                maxSteps=monthToData[monthPick-1].days[i];
+        for(int i : days){      //Разбирался как работает for each
+            if(days[i]>maxSteps){
+                maxSteps=days[i];
             }
         }
         return maxSteps;
     }
-    int bestSeries(int goalByStepsPerDay, MonthData[]monthToData, int monthPick){
+    int bestSeries(int goalByStepsPerDay){
         int currentSeries=0;
         int finalSeries=0;
         for(int i=1; i< days.length;i++){
-            if(monthToData[monthPick-1].days[i]>=goalByStepsPerDay && monthToData[monthPick-1].days[i-1]>=goalByStepsPerDay){
-                currentSeries+=1;
+            if(days[i]>=goalByStepsPerDay && days[i-1]>=goalByStepsPerDay){
+                currentSeries++;
                 if(currentSeries>finalSeries){
                     finalSeries=currentSeries;
                 }
@@ -38,7 +36,9 @@ public class MonthData {
                 currentSeries=0;
             }
         }
-
+        if (finalSeries!=0){
+        finalSeries++;
+        }
         return finalSeries;
     }
 }
