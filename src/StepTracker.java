@@ -21,7 +21,7 @@ public class StepTracker {
 
             if (month >= 1 && month <= 12) {
                 //MonthData monthData = monthToData[month-1]; изначальный вариант, когда в коде везде были параметры у методов
-                while(true) {      //Уточнить, будет ли изучаться другой способ зацикливания и проверки пользователя. Код выходит очень загруженным
+                while(true) {
                     System.out.println("Введите номер дня от 1 до 30 (включительно) или вернитесь назад, введя команду \"0\": ");
                     int day = scanner.nextInt();
                     if (day >= 1 && day <= 30) {
@@ -29,7 +29,7 @@ public class StepTracker {
                         while (true) {     //Узнать, делается ли цикл true в цикле true.
                             int steps = scanner.nextInt();
                             if (steps > 0) {
-                                //MonthData monthData = monthToData[month-1]; По тз должно быть тут, эта строка не дает заполнять массив. Все значения всегда 0
+                                //MonthData monthData = monthToData[month-1];
                                 monthData.days[day -1] = steps;
                                 System.out.println("Количество шагов ("+steps+") добавлено в "+day+"-й день, "+month+"-го месяца");
                                 break month;
@@ -65,11 +65,12 @@ public class StepTracker {
             int monthPick=scanner.nextInt();
             if (monthPick >= 1 && monthPick <= 12) {
                 monthData.printDaysAndStepsFromMonth();
-                System.out.println("За " + monthPick + " месяц вы прошли " + monthData.sumStepsFromMonth() + " шагов");
+                int sumStepsFromMonth= monthData.sumStepsFromMonth();
+                System.out.println("За " + monthPick + " месяц вы прошли " + sumStepsFromMonth + " шагов");
                 System.out.println("Ваш максимальный рекорд за день: " + monthData.maxSteps());
-                System.out.println("Среднее количество шагов за месяц: " + (monthData.sumStepsFromMonth() / 30));
-                System.out.println("За месяц вы прошли " + converter.convertToKm() + " км!");
-                System.out.println("За месяц вы сожгли " + converter.convertStepsToKilocalories() + " килокалорий!");
+                System.out.println("Среднее количество шагов за месяц: " + (sumStepsFromMonth / 30));
+                System.out.println("За месяц вы прошли " + converter.convertToKm(sumStepsFromMonth) + " км!");
+                System.out.println("За месяц вы сожгли " + converter.convertStepsToKilocalories(sumStepsFromMonth) + " килокалорий!");
                 System.out.println("Ваша максимальная серия дней с выполненной целью: " + monthData.bestSeries(goalByStepsPerDay) + " дней");
                 break;
             } else {

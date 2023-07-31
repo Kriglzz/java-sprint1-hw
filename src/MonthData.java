@@ -16,7 +16,7 @@ public class MonthData {
     }
     int maxSteps(){
         int maxSteps=0;
-        for(int i : days){      //Разбирался как работает for each
+        for(int i=0; i< days.length;i++){
             if(days[i]>maxSteps){
                 maxSteps=days[i];
             }
